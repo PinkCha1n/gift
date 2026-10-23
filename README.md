@@ -16,7 +16,7 @@ The background track is loaded from `F:/1023.mp4` by the local server and is not
 
 ## Publish with GitHub Pages
 
-The `Deploy to GitHub Pages` workflow publishes the static page whenever a commit is pushed to `main`. In the repository, open **Settings → Pages**, select **GitHub Actions** under Build and deployment, then wait for the workflow to finish. The project page will be available at <https://pinkcha1n.github.io/gift/>.
+In the repository, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/(root)`, then save. GitHub Pages will publish the static page at <https://pinkcha1n.github.io/gift/>.
 
 GitHub Pages cannot run `server.cjs` or read files from your computer. Music is therefore disabled on the Pages version; the rest of the page works without a backend.
 
