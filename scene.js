@@ -50,7 +50,9 @@
   const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
   function showMessage(text,hideAfter=0){clearTimeout(mailTimer);message.textContent=text;message.classList.remove('quiet');if(hideAfter)mailTimer=setTimeout(()=>message.classList.add('quiet'),hideAfter);}
   function setSound(){const playing=!music.paused;sound.setAttribute('aria-pressed',String(playing));sound.setAttribute('aria-label',playing?'暂停背景音乐':'播放背景音乐');sound.textContent=playing?'♫':'♪';}
-  function startMusic(){if(music.paused)music.play().catch(()=>showMessage('轻点右上角音符，开启背景音乐。',2500));}
+  const localServer=['localhost','127.0.0.1'].includes(location.hostname);
+  if(localServer)music.src='./music.mp4';else sound.hidden=true;
+  function startMusic(){if(music.src&&music.paused)music.play().catch(()=>showMessage('背景音乐暂时无法播放。',2500));}
   sound.addEventListener('click',()=>{if(music.paused)startMusic();else music.pause();});
   music.addEventListener('play',setSound);music.addEventListener('pause',setSound);
   function sprite(name,sx,sy,sw,sh,x,y,w=sw,h=sh){if(assets[name])ctx.drawImage(assets[name],sx,sy,sw,sh,Math.round(x),Math.round(y+offset),w,h);}
@@ -213,7 +215,7 @@
   }));
   overlay.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();openGift.focus();}});
   new ResizeObserver(resize).observe(game);resize();requestAnimationFrame(render);
-  Promise.all(Object.entries({farm:'farm-scene',cassie:'cassie-sprite',mailbox:'mailbox',chicken:'chicken',soil:'tilled-soil',cat:'cat',gift:'birthday-gift'}).map(([key,file])=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{assets[key]=img;resolve();};img.onerror=reject;img.src='/assets/'+file+'.png?v=cassie-13';}))).then(()=>{
+  Promise.all(Object.entries({farm:'farm-scene',cassie:'cassie-sprite',mailbox:'mailbox',chicken:'chicken',soil:'tilled-soil',cat:'cat',gift:'birthday-gift'}).map(([key,file])=>new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{assets[key]=img;resolve();};img.onerror=reject;img.src='./assets/'+file+'.png?v=cassie-13';}))).then(()=>{
     state='idle';mailbox.disabled=false;chickenHit.disabled=false;
   }).catch(()=>{document.querySelector('#loadError').hidden=false;});
 })();
