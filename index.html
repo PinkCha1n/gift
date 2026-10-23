@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#243c26">
+  <title>Cassie 的生日礼物</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/scene.css?v=gift-interaction-3">
+  <script src="/scene.js?v=gift-interaction-14" defer></script>
+</head>
+<body>
+  <main class="game" id="game" aria-label="Cassie 走出农舍，在信箱领取生日礼物">
+    <canvas id="world" width="240" height="432" role="img" aria-label="春日农场，黑色长发女孩 Cassie 在围栏内走向信箱"></canvas>
+    <button class="sound" id="sound" aria-label="播放背景音乐" aria-pressed="false" title="背景音乐">♪</button>
+    <button class="mailbox-hit" id="mailbox" aria-label="查看信箱中的生日礼物" disabled><span class="mail-hint">点击信箱</span></button>
+    <div class="chicken-sprite" id="chickenSprite" aria-hidden="true"></div>
+    <button class="chicken-hit" id="chickenHit" aria-label="和小鸡说话" disabled></button>
+    <div class="message quiet" id="message" role="status" aria-live="polite"></div>
+    <section class="gift-overlay" id="giftOverlay" role="dialog" aria-modal="true" aria-labelledby="giftTitle" hidden>
+      <h1 id="giftTitle">Cassie，生日快乐！</h1>
+      <button class="gift-button" id="openGift" aria-label="拆开生日礼盒，领取四份礼物" disabled><img src="/assets/birthday-gift.png?v=cassie-4" alt="蓝色包装、粉色丝带的生日礼盒"></button>
+      <p class="gift-tip">轻点礼盒，拆开惊喜</p>
+    </section>
+    <div class="item-tooltip" id="itemTooltip" role="status" hidden></div>
+    <section class="inventory" id="inventory" aria-label="背包，0 件物品">
+      <button class="slot" data-item="0" aria-label="背包第 1 格，空"><img src="/assets/brush-inventory.png?v=cassie-4" alt="梳子" hidden><span class="quantity" hidden>1</span></button>
+      <button class="slot" data-item="1" aria-label="背包第 2 格，空"><img src="/assets/med-inventory.png?v=cassie-4" alt="褪黑素" hidden><span class="quantity" hidden>1</span></button>
+      <button class="slot" data-item="2" aria-label="背包第 3 格，空"><img src="/assets/shampoo-inventory.png?v=cassie-4" alt="身体乳" hidden><span class="quantity" hidden>1</span></button>
+      <button class="slot" data-item="3" aria-label="背包第 4 格，空"><img src="/assets/card-inventory.png?v=gift-card-1" alt="贺卡" hidden><span class="quantity" hidden>1</span></button>
+      <button class="slot" aria-label="背包第 5 格，空"></button><button class="slot" aria-label="背包第 6 格，空"></button><button class="slot" aria-label="背包第 7 格，空"></button><button class="slot" aria-label="背包第 8 格，空"></button>
+    </section>
+    <section class="letter-overlay" id="letterOverlay" role="dialog" aria-modal="true" aria-label="给 Cassie 的生日贺卡" hidden>
+      <button class="letter-close" id="closeLetter" aria-label="关闭信纸" title="关闭信纸">×</button>
+      <div class="letter-sheet">
+        <img class="letter-paper" src="/assets/letter-paper.png?v=gift-card-1" alt="星露谷贺卡信纸">
+        <div class="letter-copy">
+          <p class="letter-greeting">To Cassie：</p>
+          <p class="letter-wish">21岁生日快乐！希望你会喜欢这个彩蛋和这些礼物^ ^。</p>
+        </div>
+      </div>
+    </section>
+    <div class="load-error" id="loadError" role="alert" hidden>农场暂时没有加载成功，请刷新再试。</div>
+  </main>
+  <audio id="music" src="/music.mp4" preload="metadata" loop playsinline></audio>
+</body>
+</html>

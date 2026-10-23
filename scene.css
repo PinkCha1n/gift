@@ -1,0 +1,53 @@
+@font-face{font-family:Valley;src:url('/assets/StardewValley.ttf') format('truetype');font-display:swap}
+@font-face{font-family:GameChinese;src:url('/assets/game-chinese.ttf?v=chinese-font-1') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+:root{font-family:Valley,GameChinese,sans-serif;color:#53341e;background:#172e20;color-scheme:light;font-synthesis:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+body{display:grid;place-items:center}
+button{font:inherit;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:3px solid #fff4bf;outline-offset:3px}
+[hidden]{display:none!important}
+.game{position:relative;isolation:isolate;width:min(100%,480px);height:100vh;height:100dvh;overflow:hidden;background:#7aaf45;--safe-bottom:max(12px,env(safe-area-inset-bottom));--dx:0px;--dy:0px}
+@media(min-width:600px){.game{width:min(480px,56dvh);box-shadow:0 0 60px #06180f88}}
+#world{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.sound{position:absolute;z-index:5;right:12px;top:max(12px,env(safe-area-inset-top));width:36px;height:36px;border:0;background:#f3ce88 url('/assets/inventory-slot.png') center/100% 100%;color:#5e391f;text-shadow:1px 1px #ffecbe;font-size:23px;line-height:36px;padding:0;image-rendering:pixelated}
+.sound[aria-pressed=true]{color:#537431}
+.mailbox-hit{position:absolute;z-index:3;border:0;background:transparent;min-width:44px;min-height:50px;padding:0;color:#fff2ca}
+.mailbox-hit:disabled{cursor:default}
+.chicken-hit{position:absolute;z-index:3;border:0;background:transparent;width:44px;height:44px;padding:0}
+.chicken-hit:disabled{cursor:default}
+.mail-hint{position:absolute;bottom:calc(100% + 5px);left:-10px;transform:translateX(-50%);padding:6px 10px;background:#543521d9;border:1px solid #e4c58a;white-space:nowrap;font-size:12px;letter-spacing:1px;box-shadow:0 2px 0 #42291966;animation:hint-bob 1.8s ease-in-out infinite}
+.mailbox-hit:disabled .mail-hint{display:none}
+.message{position:absolute;left:5%;right:5%;bottom:calc(var(--safe-bottom) + 65px);z-index:4;min-height:66px;padding:19px 23px;background:url('/assets/dialogue-box-original.png') center/100% 100% no-repeat;text-align:center;color:#614020;font-family:GameChinese,Valley,sans-serif;font-weight:700;font-size:13px;line-height:1.7;pointer-events:none;transition:opacity .3s}
+.message.quiet{opacity:0}
+.inventory{position:absolute;z-index:8;left:50%;bottom:var(--safe-bottom);transform:translateX(-50%);display:grid;grid-template-columns:repeat(8,minmax(0,1fr));width:calc(100% - 20px);max-width:400px;gap:0;padding:4px;border:3px solid #8e4c1f;background:#e9b367;box-shadow:inset 0 0 0 2px #ffd998,0 3px 0 #56331e;image-rendering:pixelated}
+.slot{position:relative;width:100%;aspect-ratio:1;border:0;background:url('/assets/inventory-slot.png') center/100% 100% no-repeat;padding:5px;display:grid;place-items:center;min-width:0;image-rendering:pixelated}
+.slot img{position:absolute;inset:4px;display:block;width:calc(100% - 8px);height:calc(100% - 8px);object-fit:contain;image-rendering:pixelated;pointer-events:none}
+.quantity{position:absolute;right:4px;bottom:1px;color:#fff5cb;font-family:Valley,monospace;font-size:15px;line-height:1;text-shadow:1px 1px #542e16,-1px -1px #542e16,1px -1px #542e16,-1px 1px #542e16}
+.slot.selected:after{content:'';position:absolute;inset:0;border:3px solid #e63f32;pointer-events:none}
+.slot.arrived{animation:slot-pop .4s steps(4,end)}
+.item-tooltip{position:absolute;z-index:9;bottom:calc(var(--safe-bottom) + 68px);left:50%;transform:translateX(-50%);padding:10px 22px;border:3px solid #a3652c;background:#ffe2a8;color:#58391e;box-shadow:inset 0 0 0 2px #ffefc6;font-size:14px;white-space:nowrap}
+.gift-overlay{position:absolute;z-index:6;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;background:#16261ea8;animation:fade-in .4s both}
+.letter-overlay{position:absolute;z-index:12;inset:0;display:grid;place-items:center;padding:24px;background:#16261eaa;animation:fade-in .2s both}
+.letter-sheet{position:relative;width:min(88%,380px);aspect-ratio:16/9;filter:drop-shadow(0 8px 12px #13201499)}
+.letter-paper{display:block;width:100%;height:100%;object-fit:fill;image-rendering:pixelated}
+.letter-copy{position:absolute;top:24%;left:15%;width:70%;color:#654222;font-family:Valley,GameChinese,sans-serif;font-size:12px;line-height:1.65;text-shadow:1px 1px #fff0c8}
+.letter-copy p{margin:0}
+.letter-greeting{margin-bottom:5px!important}
+.letter-wish{font-family:GameChinese,Valley,sans-serif;font-weight:700}
+.letter-close{position:absolute;top:max(18px,env(safe-area-inset-top));right:18px;width:40px;height:40px;border:0;background:url('/assets/inventory-slot.png') center/100% 100% no-repeat;color:#5e391f;font-family:Arial,sans-serif;font-size:28px;line-height:1}
+.gift-overlay h1{position:absolute;top:calc(50% - 158px);margin:0;color:#ffedb3;font-size:24px;font-weight:400;text-shadow:2px 2px #653a2a;text-align:center}
+.gift-button{position:absolute;top:calc(50% - 80px);width:150px;height:160px;margin:0;border:0;background:transparent;outline:none;filter:drop-shadow(0 10px 0 #17261966);animation:gift-zoom 1s cubic-bezier(.2,.72,.24,1) both}
+.gift-button:focus-visible{outline:none;outline-offset:0}
+.gift-button img{width:128px;height:128px;object-fit:contain;image-rendering:pixelated;animation:gift-bob 1.7s 1s ease-in-out infinite}
+.gift-button:disabled{cursor:default}
+.gift-tip{position:absolute;top:calc(50% + 100px);margin:0;color:#fff0c8;font-family:GameChinese,Valley,sans-serif;font-weight:700;font-size:13px;animation:fade-in .5s .8s both}
+.flying-item{position:absolute;z-index:10;width:54px;height:54px;object-fit:contain;image-rendering:pixelated;pointer-events:none;filter:drop-shadow(0 4px 2px #3b291955)}
+.load-error{position:absolute;inset:40% 12px auto;padding:20px;background:#ffe0a3;border:3px solid #9d5925;text-align:center;font-size:14px;z-index:12}
+@keyframes gift-zoom{0%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}12%{opacity:1}75%{transform:translate(0,0) scale(1.07)}100%{transform:translate(0,0) scale(1)}}
+@keyframes gift-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+@keyframes hint-bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-3px)}}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+@keyframes slot-pop{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@media(max-width:350px){.gift-overlay h1{font-size:21px}.message{font-size:12px;padding:17px 18px}.inventory{width:calc(100% - 12px);padding:3px}.slot{padding:4px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
